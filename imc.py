@@ -20,3 +20,4 @@ else:
     classificacao = "obesidade grau 3"
 
 print (f"Olá {nome}, você tem {idade} anos e seu imc é igual a: {imc:.2f}, e segundo a tabela de classificação da OMS você está com {classificacao}")
+print (f"Nome: {nome}; Idade: {idade} anos; IMC: {imc:.2f}; Classificação: {classificacao}")
