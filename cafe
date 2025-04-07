@@ -1,0 +1,125 @@
+import os
+import time
+
+# Contadores de pedidos
+cafe = 0
+leite = 0
+chocolate = 0
+
+# Função do menu principal
+def menu_principal():
+    print("Cafeteria")
+    print("1 - Acessar o cardápio")
+    print("2 - Sair")
+    print("3 - Fechar o caixa")
+    
+    # Função do cardápio
+def cardapio():
+    print("Cardápio")
+    print("1 - Café (R$ 3,00)")
+    print("2 - Leite (R$ 2,50)")
+    print("3 - Chocolate quente (R$ 4,00)")
+    print("4 - Voltar ao menu principal")
+    
+# Função para mostrar o resumo do pedido
+def resumo(cafe, leite, chocolate):
+    print("Resumo do pedido:")
+    if cafe == 0 and leite == 0 and chocolate == 0:
+        print("Nenhum item foi pedido.")
+    else:
+        if cafe > 0:
+            print(f"- Café: {cafe}")
+        if leite > 0:
+            print(f"- Leite: {leite}")
+        if chocolate > 0:
+            print(f"- Chocolate quente: {chocolate}")
+            
+# Funcao para calcular o valor total
+def calcular_total(cafe, leite, chocolate):
+    total = (cafe * 3.00) + (leite * 2.50) + (chocolate * 4.00)
+    return total
+
+# Função para processar o pagamento
+def selecionar_pagamento():
+    print("\nSelecione a forma de pagamento:")
+    print("1 - Cartão de crédito")
+    print("2 - Cartão de débito")
+    print("3 - Pix")
+    print("4 - Dinheiro")
+    
+    forma = 0
+    while forma < 1 or forma > 4:
+        forma = int(input("Digite sua opção: "))
+        if forma == 1:
+            print("Pagamento com cartão de crédito selecionado.")
+        elif forma == 2:
+            print("Pagamento com cartão de débito selecionado.")
+        elif forma == 3:
+            print("Pagamento via Pix selecionado.")
+        elif forma == 4:
+            print("Pagamento em dinheiro selecionado.")
+        else:
+            print("Opção inválida. Tente novamente.")
+    
+    time.sleep(1)
+    print("\nPagamento efetuado com sucesso!")
+    time.sleep(2)
+
+# Inicio do programa principal
+opcao = None
+
+while opcao != 0:
+    os.system('cls')
+    menu_principal()
+    opcao = int(input("Digite sua opção: "))
+
+    if opcao == 1:
+        item = -1
+        while item != 4:
+            os.system('cls')
+            cardapio()
+            item = int(input("Escolha uma opção do cardápio: "))
+            
+            if item == 1:
+                cafe = cafe + 1
+                print("Você pediu um Café.")
+                time.sleep(2)
+            elif item == 2:
+                leite = leite + 1
+                print("Você pediu um Leite.")
+                time.sleep(2)
+            elif item == 3:
+                chocolate = chocolate + 1
+                print("Você pediu um Chocolate quente.")
+                time.sleep(2)
+            elif item == 4:
+                print("Voltando ao menu principal...")
+                time.sleep(1)
+            else:
+                print("Opção inválida!")
+                time.sleep(2)
+
+    elif opcao == 2:
+        os.system('cls')
+        print("Saindo em 3... 2... 1...")
+        time.sleep(2)
+        os.system('cls')
+        resumo(cafe, leite, chocolate)
+        total = calcular_total(cafe, leite, chocolate)
+        print(f"\nTotal a pagar: R$ {total:.2f}")
+        selecionar_pagamento()
+        print("\nObrigado por visitar a cafeteria!")
+        opcao = 0
+
+    elif opcao == 3:
+        os.system('cls')
+        print("Fechando o caixa...\n")
+        resumo(cafe, leite, chocolate)
+        total = calcular_total(cafe, leite, chocolate)
+        print(f"\nTotal arrecadado: R$ {total:.2f}")
+        selecionar_pagamento()
+        input("\nPressione Enter para voltar ao menu...")
+
+    else:
+        print("Opção inválida!")
+        time.sleep(2)
